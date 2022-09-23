@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Events\UserLoginEvent;
+use App\Listeners\SendNewUserNotification;
 use App\Listeners\SendWelcomeMessageToUserListener;
+use App\Notifications\NewUserNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -22,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         UserLoginEvent::class => [
             SendWelcomeMessageToUserListener::class
+        ],
+        NewUserNotification::class => [
+            SendNewUserNotification::class
         ]
     ];
 

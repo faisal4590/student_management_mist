@@ -23,12 +23,14 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-Route::resource('students',
-    \App\Http\Controllers\StudentController::class);
+Route::middleware(['auth', 'admin'])->group(function (){
+    Route::resource('students',
+        \App\Http\Controllers\StudentController::class);
 
-Route::resource('teachers',
-    \App\Http\Controllers\TeacherController::class);
+    Route::resource('teachers',
+        \App\Http\Controllers\TeacherController::class);
 
-Route::get('/welcome_user', function (){
-   event(New \App\Events\UserLoginEvent(auth()->user()));
+    Route::get('/welcome_user', function (){
+        event(New \App\Events\UserLoginEvent(auth()->user()));
+    });
 });

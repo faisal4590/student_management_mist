@@ -25,8 +25,8 @@ class EventServiceProvider extends ServiceProvider
         UserLoginEvent::class => [
             SendWelcomeMessageToUserListener::class
         ],
-        NewUserNotification::class => [
-            SendNewUserNotification::class
+        NewUserNotification::class => [ //event
+            SendNewUserNotification::class //listener
         ]
     ];
 

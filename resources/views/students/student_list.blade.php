@@ -20,7 +20,8 @@
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Assigned Course</th>
+                    <th scope="col">Assigned Teachers</th>
+                    <th scope="col">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -29,7 +30,19 @@
                         <th scope="row">{{ $student->id }}</th>
                         <td>{{ $student->name }}</td>
                         <td>{{ $student->email }}</td>
-                        <td>{{ $student->assigned_course }}</td>
+                        <td>
+                            @foreach($student->teachers as $teacher)
+                                {{ $teacher->name . ',' }}
+                            @endforeach
+                        </td>
+
+                        <td>
+                            <a href="{{route('students.show', $student)}}"
+                                style="padding: 5px; background-color: green;
+                                 color:white">
+                                View
+                            </a>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>

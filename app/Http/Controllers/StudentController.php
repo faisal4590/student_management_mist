@@ -14,8 +14,11 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::orderBy('id', 'DESC')->get();
-        return view('students.student_list', compact('students'));
+        $students = Student::with('teachers')
+            ->orderBy('id', 'DESC')->get();
+        return view('students.student_list',
+            compact('students')
+        );
     }
 
     /**
@@ -46,8 +49,11 @@ class StudentController extends Controller
             'name' => $request->get('student_name'),
             'email' => $request->get('student_email'),
         ]);
+        foreach($request->teachers as $teacher => $id){
+            $student->teachers()->syncWithoutDetaching([$id]);
+        }
 
-        $student->teachers()->sync($request->teahcers);
+        //dd($student::with('teachers')->get()->toArray());
         return redirect()->to('/students');
     }
 
@@ -59,7 +65,9 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        //
+        return view('students.student_details', [
+           'student' => $student,
+        ]);
     }
 
     /**

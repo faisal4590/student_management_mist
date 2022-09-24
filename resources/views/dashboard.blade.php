@@ -11,8 +11,13 @@
             </a>
 
             <a href="{{ route('students.create') }}"
-               class="btn p-2 bg-indigo-500 text-white">
+               class="btn ml-5 p-2 bg-indigo-500 text-white">
                 Add Student
+            </a>
+
+            <a href="{{ route('students.index') }}"
+               class="btn ml-5 p-2 bg-yellow-500 text-white">
+                All Students
             </a>
         </div>
 

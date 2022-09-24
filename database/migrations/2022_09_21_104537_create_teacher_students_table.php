@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('teacher_student', function (Blueprint $table) {
+        Schema::create('teacher_students', function (Blueprint $table) {
 
             $table->unsignedBigInteger('teacher_id');
             $table->unsignedBigInteger('student_id');
+            $table->primary(['teacher_id', 'student_id']);
 
             $table->foreign('teacher_id')
                 ->references('id')
